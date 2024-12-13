@@ -40,6 +40,10 @@ public class PlayerStats : MonoBehaviour
     {
         return currentHealth;
     }
+    internal void Hit(float damageTaken)
+    {
+        currentHealth -= damageTaken;
+    }
     internal void FullRestoreHealth()
     {
         currentHealth = maxHealth;

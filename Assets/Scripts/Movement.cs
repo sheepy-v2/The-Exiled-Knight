@@ -55,7 +55,7 @@ public class Movement : MonoBehaviour
         {
             if (grounded || anim.GetBool("isWallSliding") == true)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
+                rb.velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
             }
         }
         //dodgeroll
@@ -65,6 +65,7 @@ public class Movement : MonoBehaviour
             {
                 anim.SetBool("dodging", true);
                 speedMultiplier = speed + rollSpeed;
+                gameObject.layer = 8;
             }
         }
         //movement
@@ -89,7 +90,7 @@ public class Movement : MonoBehaviour
 
 
         
-        GetComponent<Rigidbody2D>().velocity = new Vector2(movement.x * speedMultiplier, GetComponent<Rigidbody2D>().velocity.y);
+        rb.velocity = new Vector2(movement.x * speedMultiplier, GetComponent<Rigidbody2D>().velocity.y);
 
         if (!grounded && wallCheck())
         {
@@ -97,11 +98,11 @@ public class Movement : MonoBehaviour
             if (rb.velocity.y < 0)
             {
                 anim.SetBool("isWallSliding", true);
-                rb.velocity = new Vector2(0, rb.velocity.y * wallSlideMultiplier);
+                rb.velocity = new Vector2(movement.x, rb.velocity.y * wallSlideMultiplier);
             }
             else
             {
-                rb.velocity = new Vector2(0, rb.velocity.y);
+                rb.velocity = new Vector2(movement.x, rb.velocity.y);
             }
         }
         if (wallCheck() == false)
@@ -123,6 +124,7 @@ public class Movement : MonoBehaviour
     {
         speedMultiplier = speed;
         anim.SetBool("dodging", false);
+        gameObject.layer = 9;
     }
     private bool wallCheck()
     {
