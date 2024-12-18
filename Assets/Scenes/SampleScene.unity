@@ -1940,11 +1940,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3987909829207067851, guid: 66973588f984b2f42979fb4a37c121e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.93
+      value: 2.26
       objectReference: {fileID: 0}
     - target: {fileID: 3987909829207067851, guid: 66973588f984b2f42979fb4a37c121e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 3987909829207067851, guid: 66973588f984b2f42979fb4a37c121e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5696,9 +5696,17 @@ PrefabInstance:
       propertyPath: enemy.m_Bits
       value: 1024
       objectReference: {fileID: 0}
+    - target: {fileID: 8368560612724515056, guid: dc767dd0977b11c4e971da9dfe039505, type: 3}
+      propertyPath: strength
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8368560612724515059, guid: dc767dd0977b11c4e971da9dfe039505, type: 3}
       propertyPath: strength
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368560612724515059, guid: dc767dd0977b11c4e971da9dfe039505, type: 3}
+      propertyPath: weaponDMG
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc767dd0977b11c4e971da9dfe039505, type: 3}
