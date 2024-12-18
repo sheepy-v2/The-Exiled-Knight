@@ -32,14 +32,23 @@ public class Attack : MonoBehaviour
         }
         if (isAttacking)
         {
+            // Create a HashSet to store enemies hit in this attack cycle
+            HashSet<Collider2D> hitEnemies = new HashSet<Collider2D>();
+
             Gizmos.color = Color.red;
             double currDamage = (weaponDMG * (strength * 0.7)) * 0.8;
-            Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
-            foreach (Collider2D enemyGameObject in enemy)
+            Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
+
+            foreach (Collider2D enemyGameObject in enemies)
             {
-                enemyGameObject.gameObject.GetComponent<EnemyStats>().Hit(currDamage);
-                Debug.Log("hit enemy");
-                
+                if (!hitEnemies.Contains(enemyGameObject))
+                {
+                    enemyGameObject.gameObject.GetComponent<EnemyStats>().Hit(currDamage);
+                    Debug.Log("hit enemy");
+
+                    // Add the enemy to the HashSet to avoid hitting it again
+                    hitEnemies.Add(enemyGameObject);
+                }
             }
             Gizmos.color = Color.yellow;
         }
