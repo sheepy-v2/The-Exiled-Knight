@@ -98,11 +98,11 @@ public class Movement : MonoBehaviour
             if (rb.velocity.y < 0)
             {
                 anim.SetBool("isWallSliding", true);
-                rb.velocity = new Vector2(movement.x, rb.velocity.y * wallSlideMultiplier);
+                rb.velocity = new Vector2(0, rb.velocity.y * wallSlideMultiplier);
             }
             else
             {
-                rb.velocity = new Vector2(movement.x, rb.velocity.y);
+                rb.velocity = new Vector2(0, rb.velocity.y);
             }
         }
         if (wallCheck() == false)
