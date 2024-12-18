@@ -27,6 +27,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float wallCheckOffset;
     [SerializeField] private bool wallchecked;
     [SerializeField] private LayerMask floor;
+    [SerializeField] private LayerMask enemy;
 
     Vector2 rayOriginCenter;
     Vector2 rayOriginLeft;
@@ -50,6 +51,7 @@ public class Movement : MonoBehaviour
         rayOriginLeft = new Vector2(checkObject.transform.position.x - boxCollider.size.x / 2, checkObject.transform.position.y - boxCollider.size.y / 2);
         rayOriginRight = new Vector2(checkObject.transform.position.x + boxCollider.size.x / 2, checkObject.transform.position.y - boxCollider.size.y / 2);
         grounded = IsGrounded();
+        CheckForEnemyBelow();
         //Jumping
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
@@ -146,6 +148,21 @@ public class Movement : MonoBehaviour
         Debug.Log($"{hitLeft}, {hitRight}");
         // If any of these rays hit, consider the character grounded
         return hitLeft.collider != null || hitRight.collider != null;
+    }
+    private bool CheckForEnemyBelow()
+    {
+        if (!IsGrounded())
+        {
+            RaycastHit2D hitLeft = Physics2D.Raycast(rayOriginLeft - new Vector2(0, checkOffset), Vector2.down, checkLength, enemy);
+            RaycastHit2D hitRight = Physics2D.Raycast(rayOriginRight - new Vector2(0, checkOffset), Vector2.down, checkLength, enemy);
+            if (hitLeft.collider != null || hitRight.collider != null)
+            {
+                gameObject.layer = 8;
+                return true;
+            }
+        }
+        gameObject.layer = 9;
+        return false;
     }
     private void OnDrawGizmos()
     {
