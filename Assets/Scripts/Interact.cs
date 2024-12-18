@@ -10,7 +10,7 @@ public class Interact : MonoBehaviour
 {
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private PlayerStats stats;
-    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     [SerializeField] private bool works = false;
     [SerializeField] private float weworking = 0;
     [SerializeField] private GameObject PopUpPrefab;
@@ -66,11 +66,12 @@ public class Interact : MonoBehaviour
             works = false;
         }
     }
-    private void RespawnAllEnemies()
+    internal void RespawnAllEnemies()
     {
-        List<GameObject> gameObjects = GetEnemiesOnLayer(enemyLayer.value);
-        foreach (GameObject enemy in gameObjects)
+       
+        foreach (GameObject enemy in enemies)
         {
+            enemy.GetComponent<EnemyStats>().ResetHealth();
             enemy.GetComponent<EnemyTracking>().Respawn();
             UnityEngine.Debug.Log($"{enemy.name} found!");
         }
