@@ -33,7 +33,7 @@ public class Attack : MonoBehaviour
         if (isAttacking)
         {
             Gizmos.color = Color.red;
-            double currDamage = weaponDMG * (strength * 0.6);
+            double currDamage = (weaponDMG * (strength * 0.7)) * 0.8;
             Collider2D[] enemy = Physics2D.OverlapCircleAll(attackPoint.transform.position, radius, enemyLayer);
             foreach (Collider2D enemyGameObject in enemy)
             {
