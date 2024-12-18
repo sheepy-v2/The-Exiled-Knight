@@ -31,6 +31,10 @@ public class PlayerStats : MonoBehaviour
             }
             
         }
+        if (transform.position.y <= -50)
+        {
+            currentHealth = 0;
+        }
     }
     internal float GetStrength()
     {
@@ -55,6 +59,7 @@ public class PlayerStats : MonoBehaviour
     internal void Died()
     {
         Respawn();
+        Shrine.GetComponent<Interact>().RespawnAllEnemies();
     }
     internal void SetShrineRespawn(GameObject shrine)
     {
